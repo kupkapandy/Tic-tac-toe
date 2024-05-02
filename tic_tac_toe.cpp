@@ -110,15 +110,15 @@ bool checkWin(char *place){  // Return true if still playing, return false if so
 }
 void drawBoard(char *place){
     std::cout << '\n' << '\n';
-    std::cout << "     |     |     " << '\n';
-    std::cout << "  " << place[0] << "  |  "<< place[1] <<"  |  " << place[2] << "  " << '\n';
-    std::cout << "_____|_____|_____" << '\n';
-    std::cout << "     |     |     " << '\n';
-    std::cout << "  " << place[3] << "  |  "<< place[4] <<"  |  " << place[5] << "  " << '\n';
-    std::cout << "_____|_____|_____" << '\n';
-    std::cout << "     |     |     " << '\n';
-    std::cout << "  " << place[6] << "  |  "<< place[7] <<"  |  " << place[8] << "  " << '\n';
-    std::cout << "     |     |     " << '\n';
+    std::cout << "          |     |     " << '\n';
+    std::cout << "       " << place[0] << "  |  "<< place[1] <<"  |  " << place[2] << "  " << '\n';
+    std::cout << "     _____|_____|_____" << '\n';
+    std::cout << "          |     |     " << '\n';
+    std::cout << "       " << place[3] << "  |  "<< place[4] <<"  |  " << place[5] << "  " << '\n';
+    std::cout << "     _____|_____|_____" << '\n';
+    std::cout << "          |     |     " << '\n';
+    std::cout << "       " << place[6] << "  |  "<< place[7] <<"  |  " << place[8] << "  " << '\n';
+    std::cout << "          |     |     " << '\n';
     std::cout << '\n' << '\n';
 }
 void playerMove(char *place){
@@ -157,6 +157,8 @@ void playGame(char *place){
     system("cls");
     cout << '\n' << '\n' << "You're X, and your enemy is an O" << '\n' << '\n';
     int counter = 9;
+
+
     while(counter != 0 || checkWin(place) == true){
         drawBoard(place);
 
@@ -169,17 +171,21 @@ void playGame(char *place){
         else{
             drawBoard(place);
         }
+        counter--;
+        if(counter <= 0 && !(checkWin(place) == false)){
+            cout << '\n' << "Draw!" << '\n';
+        }
 
-        _sleep(5000);
+        _sleep(2000);
         system("cls");
+        if(counter <= 0 && checkWin(place) == true){
+            cout << '\n' << "Draw!" << '\n';
+        }
         computerMove(place);
         if(checkWin(place) == false){
             drawBoard(place);
             break;
         }
-
-        if(counter == 0 && checkWin(place) == true){
-            cout << '\n' << "Draw!" << '\n';
-        }
+        counter--;
     }
 }
